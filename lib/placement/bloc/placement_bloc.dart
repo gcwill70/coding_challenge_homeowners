@@ -13,7 +13,7 @@ class PlacementBloc extends Bloc<PlacementEvent, PlacementState> {
         final results = await _loadInput(event.input);
         emit(PlacementLoadedInput(results));
       } catch (e) {
-        emit(PlacementLoadInputError());
+        emit(PlacementError());
       }
     });
   }

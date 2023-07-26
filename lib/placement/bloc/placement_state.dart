@@ -18,4 +18,15 @@ class PlacementLoadedInput extends PlacementState {
   List<Object?> get props => [input];
 }
 
-class PlacementLoadInputError extends PlacementState {}
+class PlacementCalculating extends PlacementState {}
+
+class PlacementComplete extends PlacementState {
+  final String output;
+
+  PlacementComplete(this.output);
+
+  @override
+  List<Object?> get props => [output];
+}
+
+class PlacementError extends PlacementState {}
