@@ -35,6 +35,12 @@ class PlacementBloc extends Bloc<PlacementEvent, PlacementState> {
   }
 
   Future<PlacementOutput> place(PlacementInput input) {
-    return Future.value(const PlacementOutput({}));
+    Map<String, List<Placement>> placements = {};
+    // add neighborhoods
+    for (String name in input.neighborhoods.map((e) => e.name)) {
+      placements[name] = [];
+    }
+    //
+    return Future.value(PlacementOutput(placements));
   }
 }
