@@ -21,7 +21,7 @@ class PlacementLoadedInput extends PlacementState {
 class PlacementCalculating extends PlacementState {}
 
 class PlacementComplete extends PlacementState {
-  final String output;
+  final PlacementOutput output;
 
   PlacementComplete(this.output);
 
