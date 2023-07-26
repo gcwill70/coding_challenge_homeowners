@@ -30,4 +30,20 @@ class HomeownerModel extends VectorModel {
       preferences ?? this.preferences,
     );
   }
+
+  static HomeownerModel fromString(String input) {
+    List<String> parts = input.split(' ');
+    String name = parts[1];
+    int energy = int.parse(parts[2].substring(2));
+    int water = int.parse(parts[3].substring(2));
+    int recycling = int.parse(parts[4].substring(2));
+    List<String> neighbors = parts[5].split('>');
+    return HomeownerModel(
+      energy,
+      water,
+      recycling,
+      name,
+      neighbors,
+    );
+  }
 }

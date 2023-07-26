@@ -27,4 +27,18 @@ class NeighborhoodModel extends VectorModel {
       name ?? this.name,
     );
   }
+
+  static NeighborhoodModel fromString(String input) {
+    List<String> parts = input.split(' ');
+    String name = parts[1];
+    int energy = int.parse(parts[2].substring(2));
+    int water = int.parse(parts[3].substring(2));
+    int recycling = int.parse(parts[4].substring(2));
+    return NeighborhoodModel(
+      energy,
+      water,
+      recycling,
+      name,
+    );
+  }
 }
