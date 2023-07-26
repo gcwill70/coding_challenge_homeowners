@@ -15,6 +15,9 @@ class HomeownerModel extends VectorModel {
   );
 
   @override
+  List<Object?> get props => [energy, water, resilience, name, preferences];
+
+  @override
   HomeownerModel copyWith({
     int? energy,
     int? water,

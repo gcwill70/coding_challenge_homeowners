@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class VectorModel {
+class VectorModel extends Equatable {
   final int energy;
   final int water;
   final int resilience;
@@ -11,6 +12,9 @@ class VectorModel {
     this.water,
     this.resilience,
   );
+
+  @override
+  List<Object?> get props => [energy, water, resilience];
 
   VectorModel copyWith({
     int? energy,

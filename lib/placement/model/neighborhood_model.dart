@@ -13,6 +13,9 @@ class NeighborhoodModel extends VectorModel {
   );
 
   @override
+  List<Object?> get props => [energy, water, resilience, name];
+
+  @override
   NeighborhoodModel copyWith({
     int? energy,
     int? water,
