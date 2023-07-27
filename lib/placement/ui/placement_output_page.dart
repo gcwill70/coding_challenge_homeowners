@@ -10,7 +10,7 @@ class PlacementOutputPage extends StatelessWidget {
       fullscreenDialog: true,
       builder: (context) => BlocProvider.value(
         value: bloc,
-        child: const PlacementOutputPage(),
+        child: Scaffold(appBar: AppBar(), body: const PlacementOutputPage()),
       ),
     );
   }
@@ -22,24 +22,42 @@ class PlacementOutputPage extends StatelessWidget {
     double progress = 0;
     if (state is PlacementLoadingInput) {
       message = 'Loading input...';
-      progress = 25;
+      progress = 0.25;
+    } else if (state is PlacementLoadedInput) {
+      message = 'Loaded input!';
+      progress = 0.50;
     } else if (state is PlacementCalculating) {
       message = 'Calculating placement...';
-      progress = 50;
+      progress = 0.75;
     } else if (state is PlacementComplete) {
       message = 'Placement complete!\n\n${state.output}';
-      progress = 100;
+      progress = 1.0;
     } else if (state is PlacementError) {
       message = 'Error placing homeowners.\nPlease try again.';
-      progress = 0;
     }
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(message),
-        CircularProgressIndicator(value: progress),
-      ],
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Spacer(flex: 1),
+          Flexible(
+            flex: 2,
+            child: SizedBox.square(
+              dimension: 100,
+              child: CircularProgressIndicator(
+                strokeWidth: 10.0,
+                value: progress,
+              ),
+            ),
+          ),
+          const SizedBox(height: 50),
+          Expanded(
+            flex: 2,
+            child: Text(message),
+          ),
+          const Spacer(flex: 2),
+        ],
+      ),
     );
   }
 }
