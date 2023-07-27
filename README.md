@@ -12,7 +12,7 @@ score =
     homeowner.water * neighborhood.water +
     homeowner.resilience * neighborhood.resilience
 ```
-The score is then multiplied based on the homeowners preference order for that neighborhood. For example, if a homeowner has a preference order of [A, B, C] the A neighborhood as a 3x multiplier, then 2x for B and 3x for C.
+The score is then multiplied based on the homeowner's preference order for that neighborhood. For example, if a homeowner has a preference order of [A, B, C] the A neighborhood as a 3x multiplier, then 2x for B and 1x for C.
 
 ## Placement Approach
 After the score is calculated for each neighborhood, homeowner pair, the algorithm starts with the first neighborhood and selects the top 3 scores, then the second and selects from the remaining top 3 scores, then the third and so on.
