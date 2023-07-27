@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pearl/placement/placement.dart';
+import 'package:pearl/placement/repo/placement_repo.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  final PlacementRepo repo = PlacementRepo();
   group('PlacementBloc', () {
-    final List<HomeownerModel> expHomeowners = [
+    final List<HomeownerModel> homeowners = [
       HomeownerModel(3, 9, 2, 'H0', ['N2', 'N0', 'N1']),
       HomeownerModel(4, 3, 7, 'H1', ['N0', 'N2', 'N1']),
       HomeownerModel(4, 0, 10, 'H2', ['N0', 'N2', 'N1']),
@@ -22,16 +24,46 @@ void main() {
       HomeownerModel(6, 4, 5, 'H10', ['N0', 'N2', 'N1']),
       HomeownerModel(8, 4, 7, 'H11', ['N0', 'N1', 'N2']),
     ];
-    final List<NeighborhoodModel> expNeighborhoods = [
+    final List<NeighborhoodModel> neighborhoods = [
       NeighborhoodModel(7, 7, 10, 'N0'),
       NeighborhoodModel(2, 1, 1, 'N1'),
       NeighborhoodModel(7, 6, 4, 'N2'),
     ];
-    test('load input test', () async {
+    final Map<String, List<Placement>> placements = {
+      'N0': [
+        Placement('H5', 161),
+        Placement('H11', 154),
+        Placement('H2', 128),
+        Placement('H4', 122),
+      ],
+      'N1': [
+        Placement('H9', 23),
+        Placement('H8', 21),
+        Placement('H7', 20),
+        Placement('H1', 18),
+      ],
+      'N2': [
+        Placement('H6', 128),
+        Placement('H3', 120),
+        Placement('H10', 86),
+        Placement('H0', 83),
+      ],
+    };
+    test('loadInput() test', () async {
       final input = await rootBundle.loadString('files/input1.txt');
-      final actual = await PlacementBloc().loadInput(input);
-      assert(listEquals(actual.homeowners, expHomeowners));
-      assert(listEquals(actual.neighborhoods, expNeighborhoods));
+      final actual = await repo.loadInput(input);
+      assert(listEquals(actual.homeowners, homeowners));
+      assert(listEquals(actual.neighborhoods, neighborhoods));
+    });
+
+    test('place() test', () async {
+      final actual =
+          await repo.place(PlacementInput(homeowners, neighborhoods));
+      for (var key in actual.placements.keys) {
+        // check length
+        assert(actual.placements[key]!.length ==
+            homeowners.length ~/ neighborhoods.length);
+      }
     });
   });
 }
