@@ -15,4 +15,13 @@ class PlacementOutput {
       placements ?? this.placements,
     );
   }
+
+  @override
+  String toString() {
+    List<String> out = [];
+    for (var entry in placements.entries) {
+      out.add('${entry.key}: ${placements[entry.key]!.join(' ')}');
+    }
+    return out.join('\n');
+  }
 }
