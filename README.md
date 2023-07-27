@@ -2,6 +2,8 @@
 This project can place homeowners into neighborhoods based on their preferences. It does this by calculating a score based on their energy, water, and resilience preferences as well as their overall preference for a given neighborhood. Homeowners are placed based on their overall score.
 
 # Algorithm
+The algorithm is described below and the code can be found in `PlacementsRepo.place()` located in `lib/placement/repo/placement_repo.dart`.
+
 ## Score Calcluation
 The score for each homeowner and neighborhood pair is calculated by:
 ```
